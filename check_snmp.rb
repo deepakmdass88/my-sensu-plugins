@@ -5,11 +5,8 @@
 # Server, port, SNMP community, and Limits
 # Examples:
 #
-#   # chef-client is running
-#   check-procs -p chef-client -W 1
+#   check-snmp -h host -C community -O oid -w warning -c critical
 #
-#   # there are not too many zombies
-#   check-procs -s Z -w 5 -c 10
 #
 #  Author DeepakMDas   <deepakmdass88@gmail.com>
 #
