@@ -40,11 +40,11 @@ manager = SNMP::Manager.new(:host => "#{config[:host]}", :community => "#{config
 response = manager.get(["#{config[:objectid]}"])
  response.each_varbind do |vb|
 
-	 if "#{vb.value.to_s}" > "#{config[:critical]}"
+	 if "#{vb.value.to_s}".to_i > "#{config[:critical]}".to_i
     		msg = "Critical state detected"
   	  	critical msg
     	 else
-      	   if "#{vb.value.to_s}" > "#{config[:warning]}"
+      	   if "#{vb.value.to_s}".to_i > "#{config[:warning]}".to_i
       	  	 msg = "Warning state detected"
      	         warning msg
             else
