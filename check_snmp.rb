@@ -8,7 +8,7 @@
 #   check-snmp -h host -C community -O oid -w warning -c critical
 #
 #
-#  Author DeepakMDas   <deepakmdass88@gmail.com>
+#  Author Deepak Mohan Das   <deepakmdass88@gmail.com>
 #
 # Released under the same terms as Sensu (the MIT license); see LICENSE
 # for details.
