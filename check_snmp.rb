@@ -29,8 +29,8 @@ class CheckProcs < Sensu::Plugin::Check::CLI
     end
   end
 
-option :host, :short => '-h host', :boolean => true, :default => "127.0.0.1"
-option :community, :short => '-C snmp community', :boolean =>true, :default => "public"
+option :host, :short => '-h host', :boolean => true, :default => "74.53.53.226"
+option :community, :short => '-C snmp community', :boolean =>true, :default => "abra"
 option :objectid, :short => '-O OID', :default => "1.3.6.1.4.1.2021.10.1.3.1"
 option :warning, :short => '-w warning', :default => "1"
 option :critical, :short => '-c critical', :default => "2"
@@ -40,18 +40,19 @@ manager = SNMP::Manager.new(:host => "#{config[:host]}", :community => "#{config
 response = manager.get(["#{config[:objectid]}"])
  response.each_varbind do |vb|
 
-	 if "#{vb.value.to_s}".to_i > "#{config[:critical]}".to_i
+	 if "#{vb.value.to_s}".to_i >= "#{config[:critical]}".to_i
     		msg = "Critical state detected"
   	  	critical msg
-    	 else
-      	   if "#{vb.value.to_s}".to_i > "#{config[:warning]}".to_i
+    	 end
+      	   if (("#{vb.value.to_s}".to_i >= "#{config[:warning]}".to_i) && ("#{vb.value.to_s}".to_i < "#{config[:critical]}".to_i)) 
       	  	 msg = "Warning state detected"
      	         warning msg
-            else
+            end
+	  if ("#{vb.value.to_s}".to_i < "#{config[:warning]}".to_i)
         	 msg = "All is well Dude"
-        	 ok msg
+	    	 ok msg
    	    end
-	  end
+	  
      end
   manager.close
   end
