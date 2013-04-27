@@ -3,6 +3,9 @@
 #
 # This is a simple Ping check script for Sensu, Currently works with
 #  ICMP as well as HTTP ping.
+#
+# Requires "net-ping" gem
+#
 # Examples:
 #
 #   check-ping -h host -t type -p port    => port option is for HTTP ping
